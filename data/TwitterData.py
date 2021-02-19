@@ -1,7 +1,7 @@
 from os import stat
 from creds import *
 from tweepy import OAuthHandler, API, parsers
-from DBHelper import DBHelper
+from data.DBHelper import DBHelper
 from tweepy.streaming import StreamListener
 from textblob import TextBlob
 from termcolor import colored

@@ -2,8 +2,8 @@ from flask.cli import prepare_import
 import spacy
 # from spacy.lang.en import English, tokenizer_exceptions
 # from spacy.lang.ar.examples import sentences 
-from TwitterData import Listener, api
-from DBHelper import DBHelper
+from data.TwitterData import Listener, api
+from data.DBHelper import DBHelper
 from tweepy.streaming import Stream
 import tweepy
 from flask import Flask, jsonify, render_template, stream_with_context, Response
