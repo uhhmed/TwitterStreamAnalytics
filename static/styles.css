@@ -1,4 +1,61 @@
  .box {
-	 border-style: solid;
-	 border: 1px
+	 /* border-style: solid;
+    border: 1px */
+    border-color: rgba(255,255,255,0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
  }
+
+ body {
+     background-image: linear-gradient(120deg, #155799, #159957);;
+ }
+
+ /* .stream {
+     width: 10%;
+ }
+
+ .stop {
+    width: 10%;
+} */
+
+ .form-control.user-input  {
+    width: 50%;
+    margin: auto;
+    display: inline-block;
+    color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+    text-align:center;
+
+ }
+ .form-control.user-input:focus  {
+    width: 50%;
+    margin: auto;
+    display: inline-block;
+    color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+    text-align:center;
+
+ }
+
+ .form-control::-moz-placeholder {
+    color: rgb(207, 207, 207) !important;
+    opacity: 1;
+  }
+  .form-control:-ms-input-placeholder {
+    color: rgb(207, 207, 207) !important;
+  }
+  .form-control::-webkit-input-placeholder {
+    color: rgb(207, 207, 207) !important;
+  }

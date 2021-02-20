@@ -629,3 +629,5 @@ static/images/website-C0D3B897-1BFF-4965-A8AA-013B9E0C617A@2x.png
 static/images/website-C0D3B897-1BFF-4965-A8AA-013B9E0C617A@3x.png
 creds.py
 .DS_Store
+data/__pycache__/DBHelper.cpython-36.pyc
+data/__pycache__/TwitterData.cpython-36.pyc
