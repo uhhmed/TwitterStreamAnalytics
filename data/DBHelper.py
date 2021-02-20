@@ -29,7 +29,7 @@ class DBHelper:
         return result
 
     def insert(self, values):
-        self.insert_statement = sql = "INSERT INTO `tweets` (`tweet`, `created`, `author`, `full_tweet`) VALUES (%s, %s, %s, %s)"
+        self.insert_statement = sql = "INSERT INTO `tweets` (`tweet`, `created`, `screen_name`, `author`, `location`, `full_tweet`) VALUES (%s, %s, %s, %s, %s, %s)"
         self.__connect__()
         self.cur.execute(self.insert_statement, values)
         try:

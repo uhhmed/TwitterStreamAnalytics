@@ -22,24 +22,25 @@ function feed(data) {
 function insertData(index, values) {
     // func that creates a "div" for each tweet with the corresponding struct, and insert values of latest stream tweet.
     // additionally, a random border color is chosen based on bootstrap's predefined styles.
-
-    var borderTypes = ["primary", "secondary", "success", "danger", "warning", "info", "dark"]
-    var random = Math.floor(Math.random() * borderTypes.length);
-
-    let newClass = "box-"+String(index)
-    $( ".row" ).append("<div class='"+"shadow p-4 col-3 m-1 box "+newClass+"'><div class='post'></div><br/><div class='metadata'><span class='author'></span><span class='created'></span><span class='username'></span></div></div>" );
-    // $('.box').addClass("border border-"+borderTypes[random])
-
     if (values[index]) {
-        if (values[index]['tweet'] != ''){
-            $('.'+newClass+' .post')[0].innerText = values[index]['tweet']
-        }
-        else {
-            $('.'+newClass+' .post')[0].innerText = values[index]['full_tweet']
-        }
-            $('.'+newClass+' .author')[0].innerText = values[index]['author']
-            $('.'+newClass+' .created')[0].innerText = moment(values[index]['created']).format('LT - MMM D, YYYY');
-            $('.'+newClass+' .username')[0].innerText = '@'+values[index]['author']
+        var borderTypes = ["primary", "secondary", "success", "danger", "warning", "info", "dark"]
+        var random = Math.floor(Math.random() * borderTypes.length);
+
+        let newClass = "box-"+String(index)
+        $( ".row" ).append("<div class='"+"shadow p-4 col-3 m-1 box "+newClass+"'><div class='post'></div><br/><div class='metadata'><span class='author'></span><span class='location'></span><span class='created'></span><span class='username'></span></div></div>" );
+        // $('.box').addClass("border border-"+borderTypes[random])
+
+
+            if (values[index]['tweet'] != ''){
+                $('.'+newClass+' .post')[0].innerText = values[index]['tweet']
+            }
+            else {
+                $('.'+newClass+' .post')[0].innerText = values[index]['full_tweet']
+            }
+                $('.'+newClass+' .author')[0].innerText = values[index]['screen_name']
+                $('.'+newClass+' .location')[0].innerText = values[index]['location']
+                $('.'+newClass+' .created')[0].innerText = moment(values[index]['created']).format('LT - MMM D, YYYY');
+                $('.'+newClass+' .username')[0].innerText = '@'+values[index]['author']
     }
 }
 
@@ -54,7 +55,11 @@ function getData() {
         feed(data)
         // }
     });
+    // $( "#tweets" )[0].innerHTML = await(await fetch(url).text();
+    // setTimeout(refresh,2000);
+
 }
+
 
 function startStream() {
     // func to map "Stream" button and start streaming.
@@ -84,6 +89,7 @@ $(".stream").on("click", function(){
 
     // start an interval every second to update client end with latest streamed tweets
     timerId = setInterval(() => {
+        console.log('started auto refresh!')
         getData()
         $().load('http://127.0.0.1:5000/')
     }, 1000);

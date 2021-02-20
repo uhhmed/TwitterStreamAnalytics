@@ -25,8 +25,8 @@ def index():
 def streamData():
     print('starting...')
     try:
-        stream.filter(track=['#Arby'])
-        # stream.sample()
+        # stream.filter(track=['#Champ'])
+        stream.sample()
         return '200'
     except tweepy.TweepError as e:
         print(e)
