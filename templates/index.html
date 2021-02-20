@@ -2,15 +2,37 @@
 	<head>
 		<link type=text/css href="{{ url_for('static', filename='styles.css') }}" rel='stylesheet'>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
 	</head>
 	<body style="margin:0px;">
+
+		<header class="page-header p-4 m-2" role="banner">
+			<h1 class="project-name">Twitter Real-Time</h1>
+			<h5 class="project-tagline">Enter a #Hashtag or Keyword 🚀<br/> Sit back and relax 😌</h5>
+			  <!-- <a href="/" class="btn header">Home</a>
+			  <a href="/path-to-herd-immunity" class="btn header">Path to Herd Immunity</a>
+			  <a href="/#view-us-infections-estimates" class="btn header">Infections / Vaccination Estimates</a>
+			  <a href="/#us-counties-infections-estimates" class="btn header">County Estimates</a>
+			  <a href="/infections/summary-counties" class="btn header">Counties Summary</a>
+			  <a href="/maps-infections" class="btn header">Maps</a>
+			  <a href="/about" class="btn header">About</a>
+			  <a href="/contact" class="btn header">Contact</a>
+			  <a href="/donate" class="btn header">DONATE</a> -->
+		  </header>
+
+
+
+
+
+
 		
-		<div class="col text-center m-5">
-			<input type="text"  class="form-control user-input shadow" placeholder="#">
+		<div class="col text-center m-2">
+			<input type="text"  class="form-control user-input shadow-lg" placeholder="👀">
 			<div class="row-sm ">
 				<button type="button" class="btn btn-primary stream rounded m-4 w-30 shadow-lg">Stream</button>
 				<button type="button" class="btn btn-danger stop rounded m-4 w-30 shadow-lg">Stop</button>

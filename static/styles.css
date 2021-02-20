@@ -1,6 +1,10 @@
+
+
+
  .box {
 	 /* border-style: solid;
     border: 1px */
+    position: relative;
     border-color: rgba(255,255,255,0.2);
     border-style: solid;
     border-width: 1px;
@@ -9,8 +13,65 @@
  }
 
  body {
-     background-image: linear-gradient(120deg, #155799, #159957);;
+    background-image: linear-gradient(120deg, #155799, #159957);
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    font-size: 16px;
+    /* line-height: 1.5; */
  }
+
+ .page-header {
+    color: #fff;
+    text-align: center;
+    padding: 5rem 6rem;
+    /* background-color: #159957; */
+    /* background-image: linear-gradient(120deg, #155799, #159957); */
+ }
+
+ .project-name {
+    margin-top: 0;
+    margin-bottom: 0.1rem;
+}
+@media screen and (min-width: 64em)
+{.project-name {
+    font-size: 3.25rem;
+    }
+}
+
+ .project-tagline {
+    margin-bottom: 2rem;
+    font-weight: normal;
+    opacity: 0.7;
+}
+
+@media screen and (min-width: 64em)
+{.project-tagline {
+    font-size: 1.25rem;
+    }
+}
+
+.btn.header {
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+@media screen and (min-width: 64em){
+    .btn.header{padding:0.75rem 1rem}
+}
+
+@media screen and (min-width: 42em) and (max-width: 64em){
+    .btn.header{padding:0.6rem 0.9rem;font-size:0.9rem}
+}
+@media screen and (max-width: 42em){
+    .btn.header{display:block;width:100%;padding:0.75rem;font-size:0.9rem}.btn.header+.btn.header{margin-top:1rem;margin-left:0}
+}
 
  /* .stream {
      width: 10%;
@@ -49,13 +110,44 @@
 
  }
 
- .form-control::-moz-placeholder {
-    color: rgb(207, 207, 207) !important;
-    opacity: 1;
-  }
-  .form-control:-ms-input-placeholder {
-    color: rgb(207, 207, 207) !important;
-  }
-  .form-control::-webkit-input-placeholder {
-    color: rgb(207, 207, 207) !important;
-  }
+.form-control::-moz-placeholder {
+color: rgb(207, 207, 207) !important;
+opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+color: rgb(207, 207, 207) !important;
+}
+.form-control::-webkit-input-placeholder {
+color: rgb(207, 207, 207) !important;
+}
+
+.post {
+    color: rgb(206, 206, 206);
+    line-height: 1.5;
+    padding: 1%;
+    margin-bottom: 20%;
+    
+}
+
+.metadata {
+    position: absolute;
+    bottom: 10;
+    left: 10;
+    /* top: 85%; */
+    /* padding: 10%; */
+
+}
+.author {
+    color: rgb(192, 169, 169);
+    display:block;
+    
+}
+.username {
+    color: rgb(192, 169, 169);
+    display:block;
+}
+.created {
+    color: rgb(68, 68, 68);
+    display:block;
+
+}

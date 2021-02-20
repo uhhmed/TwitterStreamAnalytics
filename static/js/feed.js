@@ -5,12 +5,16 @@ var tweet_counter = 0;
 
 function feed(data) {
     // func to loop through data passed and created element on client with tweet info.
-    console.log(tweet_counter);
+    // console.log(tweet_counter);
 
-    if (tweet_counter < 20 && data.length > 0) {
+    if (tweet_counter < 20) {
         for (let i = 0; i < data.length; i++) {
-            insertData(tweet_counter, data)
-            tweet_counter++
+            if (data){
+
+                insertData(tweet_counter, data)
+                ++tweet_counter
+            }
+            
         }
     }
 }
@@ -23,19 +27,20 @@ function insertData(index, values) {
     var random = Math.floor(Math.random() * borderTypes.length);
 
     let newClass = "box-"+String(index)
-    $( ".row" ).append("<div class='"+"shadow p-4 col-3 m-1 box "+newClass+"'><div class='post'></div><div class='author'></div><div class='created'></div><div class='username'></div></div>" );
+    $( ".row" ).append("<div class='"+"shadow p-4 col-3 m-1 box "+newClass+"'><div class='post'></div><br/><div class='metadata'><span class='author'></span><span class='created'></span><span class='username'></span></div></div>" );
     // $('.box').addClass("border border-"+borderTypes[random])
 
-    if (values[index]['tweet'] != ''){
-        $('.'+newClass+' .post')[0].innerText = 'Tweet: '+values[index]['tweet']
+    if (values[index]) {
+        if (values[index]['tweet'] != ''){
+            $('.'+newClass+' .post')[0].innerText = values[index]['tweet']
+        }
+        else {
+            $('.'+newClass+' .post')[0].innerText = values[index]['full_tweet']
+        }
+            $('.'+newClass+' .author')[0].innerText = values[index]['author']
+            $('.'+newClass+' .created')[0].innerText = moment(values[index]['created']).format('LT - MMM D, YYYY');
+            $('.'+newClass+' .username')[0].innerText = '@'+values[index]['author']
     }
-    else {
-        $('.'+newClass+' .post')[0].innerText = 'Tweet: \n'+values[index]['full_tweet']
-    }
-        $('.'+newClass+' .author')[0].innerText = 'Screename: \n'+values[index]['author']
-        $('.'+newClass+' .created')[0].innerText = 'Date: \n'+moment(values[index]['created']).format('LT - MMM D, YYYY');
-        $('.'+newClass+' .username')[0].innerText = '@'+values[index]['author']
-    
 }
 
 function getData() {
@@ -45,9 +50,9 @@ function getData() {
         .then(response => response.json())
         .then(data => {
         // console.log(data[0]['tweet'])
-        if (data.slice(-1)[0] != null){
-            feed(data)
-        }
+        // if (data.slice(-1)[0] != null){
+        feed(data)
+        // }
     });
 }
 
