@@ -55,7 +55,7 @@ class Listener(StreamListener):
                 try:
                     # doc = nlp(status.extended_tweet["full_text"])
                     print('🚀'*60)
-                    print(status)
+                    print(status.extended_tweet["full_text"])
                     db.__connect__()
                     db.insert(('', status.created_at, status.user.name ,status.user.screen_name, status.user.location, status.extended_tweet["full_text"]))
                     # print(status.extended_tweet["full_text"])
@@ -63,7 +63,7 @@ class Listener(StreamListener):
                 except:
                     # doc = nlp(status.text)
                     print('🚀'*60)
-                    print(status)
+                    print(status.text)
                     db.insert((status.text, status.created_at, status.user.name ,status.user.screen_name, status.user.location, ''))
                     # print(status.text)
                     # print(status.created_at)

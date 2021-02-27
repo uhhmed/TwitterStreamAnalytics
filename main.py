@@ -6,12 +6,14 @@ from data.TwitterData import Listener, api
 from data.DBHelper import DBHelper
 from tweepy.streaming import Stream
 import tweepy
-from flask import Flask, jsonify, render_template, stream_with_context, Response
+from flask import Flask, render_template, stream_with_context, Response
+from flask_cors import CORS
 import json
 
 
 
 app = Flask(__name__)
+CORS(app)
 
 listener = Listener()
 stream = Stream(auth=api.auth, listener=listener)
@@ -26,7 +28,7 @@ def streamData():
     print('starting...')
     try:
         # stream.filter(track=['#Champ'])
-        stream.sample()
+        # stream.filter(track=['STILL WITH YOU'])
         return '200'
     except tweepy.TweepError as e:
         print(e)
@@ -53,7 +55,7 @@ def fetchLatest():
     db = DBHelper()
     db.__connect__()
     result = db.fetch('select * from tweets order by id desc')
-
+    print('Fetched 👍')
     return json.dumps(result, default=str)
 
 

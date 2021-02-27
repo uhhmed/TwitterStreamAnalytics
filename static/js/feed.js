@@ -1,49 +1,79 @@
 // initialize global counter to not overwhelm front-end with tweets
 var tweet_counter = 0;
-
+var tweets;
 
 
 function feed(data) {
     // func to loop through data passed and created element on client with tweet info.
     // console.log(tweet_counter);
-
-    if (tweet_counter < 20) {
-        for (let i = 0; i < data.length; i++) {
-            if (data){
-
-                insertData(tweet_counter, data)
-                ++tweet_counter
-            }
+    // console.log(data[0])
+    // insertData(tweet_counter, data)
+    if (tweet_counter < 50) {
+        // for (let i = 0; i < data.length; i++) {
+            // if (data){
+        console.log(data);
+        insertData(data);
+        ++tweet_counter;
+                // console.log(tweet_counter);
+            // }
             
-        }
+        // }
     }
-}
+};
 
-function insertData(index, values) {
+function insertData() {
     // func that creates a "div" for each tweet with the corresponding struct, and insert values of latest stream tweet.
     // additionally, a random border color is chosen based on bootstrap's predefined styles.
-    if (values[index]) {
-        var borderTypes = ["primary", "secondary", "success", "danger", "warning", "info", "dark"]
-        var random = Math.floor(Math.random() * borderTypes.length);
+    if (tweets) {
+        for (let i = 0; i < tweets.length; i++) {
 
-        let newClass = "box-"+String(index)
-        $( ".row" ).append("<div class='"+"shadow p-4 col-3 m-1 box "+newClass+"'><div class='post'></div><br/><div class='metadata'><span class='author'></span><span class='location'></span><span class='created'></span><span class='username'></span></div></div>" );
-        // $('.box').addClass("border border-"+borderTypes[random])
+            if (tweets[i]['done']){
+                console.log(tweets[i])
+                console.log('tweet already has been fed!!👍👍👍👍')
+            }
+            else if (tweet_counter < 50) {
+                
+                var borderTypes = ["primary", "secondary", "success", "danger", "warning", "info", "dark"]
+                var random = Math.floor(Math.random() * borderTypes.length);
+
+                let newClass = "box-"+String(tweet_counter)
+                $( ".row" ).prepend("<div class='"+"shadow p-4 col-3 m-1 box "+newClass+"'><div class='post'></div><br/><div class='metadata'><span class='author'></span><i class='fas fa-map-marker-alt'><span class='location'></span></i><span class='created'></span><span class='username'></span></div></div>" );
+                // $('.box').addClass("border border-"+borderTypes[random])
 
 
-            if (values[index]['tweet'] != ''){
-                $('.'+newClass+' .post')[0].innerText = values[index]['tweet']
+                if (tweets[i]['tweet'] != ''){
+                    $('.'+newClass+' .post')[0].innerText = tweets[i]['tweet']
+                }
+                else {
+                    $('.'+newClass+' .post')[0].innerText = tweets[i]['full_tweet']
+                }
+                $('.'+newClass+' .author')[0].innerText = tweets[i]['screen_name']
+                $('.'+newClass+' .location')[0].innerText = ' '+tweets[i]['location']
+                $('.'+newClass+' .created')[0].innerText = moment(tweets[i]['created']).format('LT - MMM D, YYYY');
+                $('.'+newClass+' .username')[0].innerText = '@'+tweets[i]['author']
+                ++tweet_counter
+                tweets[i]['done'] = 1
             }
             else {
-                $('.'+newClass+' .post')[0].innerText = values[index]['full_tweet']
+                console.log('holding off on the tweets 🤚🤚🤚🤚🤚');
             }
-                $('.'+newClass+' .author')[0].innerText = values[index]['screen_name']
-                $('.'+newClass+' .location')[0].innerText = values[index]['location']
-                $('.'+newClass+' .created')[0].innerText = moment(values[index]['created']).format('LT - MMM D, YYYY');
-                $('.'+newClass+' .username')[0].innerText = '@'+values[index]['author']
-    }
-}
 
+        }
+    }
+};
+
+
+
+async function refresh() {
+//   btn.disabled = true;
+//   dynamicPart.innerHTML = "Loading..."
+    console.log('starting to feed data...');
+    tweets = await(await fetch(url)).json();
+    insertData()
+    setTimeout(refresh,1000);
+};
+
+let url="http://127.0.0.1:5000/data"
 function getData() {
     // fetch data from db endpoint, and feed to func to create tweet on client end.
 
@@ -57,8 +87,11 @@ function getData() {
     });
     // $( "#tweets" )[0].innerHTML = await(await fetch(url).text();
     // setTimeout(refresh,2000);
+    // console.log('Stream button clicked!')
+    // feed(await(await fetch(url)).text());
+    // setTimeout(getData,5000);
 
-}
+};
 
 
 function startStream() {
@@ -88,17 +121,16 @@ $(".stream").on("click", function(){
     startStream()
 
     // start an interval every second to update client end with latest streamed tweets
-    timerId = setInterval(() => {
-        console.log('started auto refresh!')
-        getData()
-        $().load('http://127.0.0.1:5000/')
-    }, 1000);
+
+    console.log('started auto refresh!')
+    refresh()
+
 
 });
 
-// map "Stop" button to func, and clear "interval" refresh.
+// // map "Stop" button to func, and clear "interval" refresh.
 $(".stop").on("click", function(){
-    clearInterval(timerId);
+    // clearInterval(timerId);
     console.log('stopped data fetching');
     stopStream()
     console.log('disconnected data stream');
@@ -108,5 +140,5 @@ $(".stop").on("click", function(){
 
 
 // on page load to show [FOR TESTING]
-getData()
+// getData()
 
