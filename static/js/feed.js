@@ -1,43 +1,29 @@
 // initialize global counter to not overwhelm front-end with tweets
 var tweet_counter = 0;
-var tweets;
+var timerId;
+let url="http://127.0.0.1:5000/data"
 
 
-function feed(data) {
-    // func to loop through data passed and created element on client with tweet info.
-    // console.log(tweet_counter);
-    // console.log(data[0])
-    // insertData(tweet_counter, data)
-    if (tweet_counter < 50) {
-        // for (let i = 0; i < data.length; i++) {
-            // if (data){
-        console.log(data);
-        insertData(data);
-        ++tweet_counter;
-                // console.log(tweet_counter);
-            // }
-            
-        // }
-    }
-};
-
-function insertData() {
+function insertData(tweets) {
     // func that creates a "div" for each tweet with the corresponding struct, and insert values of latest stream tweet.
     // additionally, a random border color is chosen based on bootstrap's predefined styles.
+
     if (tweets) {
+        
         for (let i = 0; i < tweets.length; i++) {
 
             if (tweets[i]['done']){
                 console.log(tweets[i])
                 console.log('tweet already has been fed!!👍👍👍👍')
             }
-            else if (tweet_counter < 50) {
+
+            else if (tweet_counter < 100) {
                 
                 var borderTypes = ["primary", "secondary", "success", "danger", "warning", "info", "dark"]
                 var random = Math.floor(Math.random() * borderTypes.length);
 
                 let newClass = "box-"+String(tweet_counter)
-                $( ".row" ).prepend("<div class='"+"shadow p-4 col-3 m-1 box "+newClass+"'><div class='post'></div><br/><div class='metadata'><span class='author'></span><i class='fas fa-map-marker-alt'><span class='location'></span></i><span class='created'></span><span class='username'></span></div></div>" );
+                $( ".row" ).prepend("<div class='"+"shadow p-3 col-3 m-1 box "+newClass+"'><div class='post'></div><br/><div class='metadata'><span class='author'></span><i class='fas fa-map-marker-alt'><span class='location'></span></i><span class='userDate'><span class='username'></span><span class='created'></span></span></div></div>" );
                 // $('.box').addClass("border border-"+borderTypes[random])
 
 
@@ -54,6 +40,7 @@ function insertData() {
                 ++tweet_counter
                 tweets[i]['done'] = 1
             }
+
             else {
                 console.log('holding off on the tweets 🤚🤚🤚🤚🤚');
             }
@@ -65,15 +52,14 @@ function insertData() {
 
 
 async function refresh() {
-//   btn.disabled = true;
-//   dynamicPart.innerHTML = "Loading..."
+
     console.log('starting to feed data...');
-    tweets = await(await fetch(url)).json();
-    insertData()
-    setTimeout(refresh,1000);
+    insertData(await(await fetch(url)).json())
+    
+    timerId = setTimeout(refresh,1000);
 };
 
-let url="http://127.0.0.1:5000/data"
+
 function getData() {
     // fetch data from db endpoint, and feed to func to create tweet on client end.
 
@@ -114,7 +100,6 @@ function stopStream() {
         })
 }
 
-let timerId;
 
 // map "Stream" button to func to start stream.
 $(".stream").on("click", function(){
@@ -130,7 +115,7 @@ $(".stream").on("click", function(){
 
 // // map "Stop" button to func, and clear "interval" refresh.
 $(".stop").on("click", function(){
-    // clearInterval(timerId);
+    clearTimeout(timerId);
     console.log('stopped data fetching');
     stopStream()
     console.log('disconnected data stream');

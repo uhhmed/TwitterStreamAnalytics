@@ -31,7 +31,7 @@ TODO:
 
 class Listener(StreamListener):
     
-    tweets = { 'tweets_and_scores': [{
+    tweets = { 'tweet_and_scores': [{
    'tweet': '',
    'sentiment': {},
    'timestamp': dt.now(),

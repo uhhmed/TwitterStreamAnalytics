@@ -134,7 +134,7 @@ color: rgb(207, 207, 207) !important;
 .metadata {
     position: absolute;
     bottom: 10;
-    left: 10;
+    /* left: 10; */
     /* top: 85%; */
     /* padding: 10%; */
 
@@ -149,18 +149,19 @@ color: rgb(207, 207, 207) !important;
     text-overflow: ellipsis;
     white-space: normal;
     width: 60%;
-    
+    margin-bottom: 3%;
     
 }
 .username {
     color: rgb(192, 169, 169);
     display:block;
+    margin-right: 45;
 }
 .location {
     color: rgb(218, 214, 214);
     /* display:block; */
     -webkit-box-orient: vertical;
-    display: -webkit-box;
+    /* display: -webkit-box; */
     -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: clip;
@@ -172,8 +173,12 @@ color: rgb(207, 207, 207) !important;
     display:block;
 
 }
+.userDate {
+    display: flex;
+}
 
-.fa-map-marker-alt:before {
+.fa-map-marker-alt {
     /* content: "\f3c5"; */
     color: darkturquoise;
+    margin-bottom: 3%;
 }
